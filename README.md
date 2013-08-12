@@ -9,8 +9,8 @@ A dump file created with this script will look something like this:
 
 <pre>backup/develop_2013-08-12_e970d31.sql</pre>
 
-* For brevity, it does not included time in the date component, instead it auto-increments if same filename already exists.
-* Currently, it assumes the existence of a backup/ directory at the same level as the web document root.
+* For brevity, time is not included in the date component. Instead the filename is auto-incremented if it already exists.
+* Currently, a backup/ directory at the same level as the web document root is required to exist.
 
 I recommend creating a Drush shell alias pointing to this script. In drushrc.php, add:
 
