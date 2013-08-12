@@ -12,12 +12,20 @@ if (empty($self)) {
   drush_die("I can't bootstrap from the current location.", 0);
 }
 
+/**
+ * @TODO: Get server environment from settings.local.php configured variable
+ */
 $branch = exec('git rev-parse --abbrev-ref HEAD');
 $hash = exec('git log -n 1 --pretty=%h');
 $web_root = drush_invoke_process('@self', 'dd');
+
+/**
+ * @TODO: Get backup directory from settings.local.php configured variable
+ */
 $path = explode('/', $web_root['output']);
 array_pop($path);
 $bak_dir = implode('/', $path) . '/backup';
+
 $result_file = $bak_dir . '/' . $branch . '_' . date('Y-m-d') . '_' . $hash;
 
 if(!file_exists("$result_file.sql")) {
