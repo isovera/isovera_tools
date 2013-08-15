@@ -15,6 +15,7 @@ if (empty($self)) {
 /**
  * @TODO: Get server environment from settings.local.php configured variable
  * @TODO: Infer master branch? or instead use tag for production code in detached HEAD state
+ * @TODO: Replace / with - in branch names
  */
 $branch = exec('git rev-parse --abbrev-ref HEAD');
 $hash = exec('git log -n 1 --pretty=%h');
