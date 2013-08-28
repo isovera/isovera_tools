@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * Drush commands for Isovera Tools.
+ */
+
+/**
  * Implements hook_drush_help().
  */
 function isovera_tools_drush_help($command) {
