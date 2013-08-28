@@ -5,8 +5,12 @@
  */
 function isovera_tools_drush_help($command) {
   switch ($command) {
-    case 'drush:git-commit-dump':
-      return dt('Git commit dump');
+    case 'drush:iso-git-commit-dump':
+      return dt("Backup the site's database and create the filename with the following format:\n[current branch]-[date (YYYY-MM-DD)]-[7 character commit hash][-increment].sql.gz");
+    case 'meta:isovera_tools:title':
+      return dt("Isovera Tools commands");
+    case 'meta:isovera_tools:summary':
+      return dt("Miscellaneous Isovera Tools");
   }
 }
 
