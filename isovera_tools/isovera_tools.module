@@ -10,3 +10,42 @@
 function isovera_tools_install() {
   variable_set('isovera_tools_backup_dir', 'backup');
 }
+
+/**
+ * Implements hook_token_info()
+ */
+function isovera_tools_token_info() {
+  $site['git-branch'] = array(
+    'name' => t("Git Branch"),
+    'description' => t("The current git branch name."),
+  );
+
+  $site['git-hash'] = array(
+    'name' => t("Git Hash (abbreviated)"),
+    'description' => t("The abbreviated git hash of the current commit."),
+  );
+
+  return array(
+    'tokens' => array('site' => $site),
+  );
+}
+
+/**
+ * Implements hook_tokens()
+ */
+function isovera_tools_tokens($type, $tokens, $data = array(), $options = array()) {
+  if ($type == 'site') {
+    $replacements = array();
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+	    case 'git-branch':
+		  $replacements[$original] = exec('git rev-parse --abbrev-ref HEAD');
+		  break;
+		case 'git-hash':
+		  $replacements[$original]= exec('git log -n 1 --pretty=%h');
+		  break;
+	  }
+	}
+    return $replacements;
+  }
+}
