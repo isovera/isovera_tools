@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Code for the Isovera developer tools module
+ */
+
+/**
+ * Implements hook_install()
+ */
+function isovera_tools_install() {
+  variable_set('isovera_tools_backup_dir', 'backup');
+}

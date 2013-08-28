@@ -1,0 +1,5 @@
+name = Isovera developer tools
+description = Drush commands for Isovera developers
+core = 7.x
+package = Isovera
+version = 7.x
