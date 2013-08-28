@@ -24,7 +24,7 @@ For information on Drush shell aliases, see http://drush.ws/examples/example.dru
 
 A custom module that wraps the git-aware db dumps script in a module and provides the drush iso-git-commit-dump command (alias: isodump). Two tokens are also provided for use with the Backup and Migrate module.
 
-The backup directory location defaults to *private://backup*. This can be overridden in a local settings.php file with the following snippet:
+The backup directory location defaults to `private://backup`. This can be overridden in a local settings.php file with the following snippet:
 
 ```$conf['isovera_tools_backup_dir'] = '/path/to/backup';```
 
