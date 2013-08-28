@@ -18,3 +18,13 @@ I recommend creating a Drush shell alias pointing to this script. In drushrc.php
 <pre>$options['shell-aliases']['sql-gd'] = "!drush scr /path/to/sql-gd.php";</pre>
 
 For information on Drush shell aliases, see http://drush.ws/examples/example.drushrc.php
+
+
+## isovera_tools: Isovera developer tools
+
+A custom module that wraps the git-aware db dumps script in a module and provides the drush iso-git-commit-dump command (alias: isodump). Two tokens are also provided for use with the Backup and Migrate module.
+
+The following tokens are included:
+
+* git-branch - The current git branch name
+* git-hash - The abbreviated git hash of the current commit
