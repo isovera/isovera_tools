@@ -32,7 +32,7 @@ function isovera_tools_drush_command() {
 }
 
 /**
- * Callback function for drush refresh-learning-lens-styles
+ * Callback function for drush iso-git-commit-dump
  *
  */
 function drush_isovera_tools_iso_git_commit_dump() {
