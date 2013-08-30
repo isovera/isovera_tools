@@ -52,6 +52,10 @@ function drush_isovera_tools_iso_git_commit_dump() {
   $hash = exec('git log -n 1 --pretty=%h');
   $bak_dir = variable_get('isovera_tools_backup_dir');
 
+  if(!file_exists($bak_dir)) {
+    drush_die("The backup directory does not exist.", 0);
+  }
+  
   $result_file = $bak_dir . '/' . $branch . '_' . date('Y-m-d') . '_' . $hash;
 
   if(!file_exists("$result_file.sql.gz")) {
