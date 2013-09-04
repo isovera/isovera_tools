@@ -19,8 +19,10 @@ be overridden in a local settings.php file with the following snippet:
 ### Profile
 
 This module installs a backup and migrate profile named isovera_tools, which
-provides a file name with the git tokens. Be sure to check the excluded tables
-and other settings.
+provides a file name with the git tokens. You will probably want to update the
+excluded tables and other settings for this profile at
+
+/admin/config/system/backup_migrate/profile/list/edit/isovera_tools
 
 ### Git Tokens
 
