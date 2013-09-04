@@ -4,7 +4,7 @@ A custom module that wraps the git-aware db dump script in a module and
 provides the drush iso-git-commit-dump command (alias: isodump). Two
 tokens are also provided for use with the Backup and Migrate module.
 
-To use the command, simply enable the Isovera Tools module and execute
+To use, simply enable the Isovera Tools module and execute
 the following drush command:
 
   $ drush isodump
