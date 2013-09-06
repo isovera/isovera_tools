@@ -46,7 +46,6 @@ function drush_isovera_tools_iso_git_commit_dump() {
   /**
    * @TODO: Get server environment from settings.local.php configured variable
    * @TODO: Infer master branch or use tag for production code in detached HEAD state
-   * @TODO: Replace / with - in branch names
    */
   $branch = exec('git rev-parse --abbrev-ref HEAD');
   $hash = exec('git log -n 1 --pretty=%h');
@@ -56,6 +55,10 @@ function drush_isovera_tools_iso_git_commit_dump() {
     drush_die("The backup directory does not exist.", 0);
   }
   
+  //  Convert slashes to dashes in branch name
+  $branch = str_replace('/', '-', $branch);
+
+  // Result directory path and filename
   $result_file = $bak_dir . '/' . $branch . '_' . date('Y-m-d') . '_' . $hash;
 
   if(!file_exists("$result_file.sql.gz")) {
