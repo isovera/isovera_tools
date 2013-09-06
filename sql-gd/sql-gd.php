@@ -13,6 +13,7 @@ if (empty($self)) {
 }
 
 /**
+ * @TODO: Add support for remote site aliases
  * @TODO: Get server environment from settings.local.php configured variable
  * @TODO: Infer master branch? or instead use tag for production code in detached HEAD state
  * @TODO: Replace / with - in branch names

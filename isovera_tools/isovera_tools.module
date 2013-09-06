@@ -5,6 +5,7 @@
  */
 
 /**
+ * @TODO: Add support for remote site aliases
  * @TODO: Make gzip optional
  * @TODO: Implement hook_backup_migrate_destinations()
  * @TODO: Document server environment from settings.local.php configured variable
