@@ -12,6 +12,8 @@ function isovera_tools_drush_help($command) {
   switch ($command) {
     case 'drush:iso-git-commit-dump':
       return dt("Backup the site's database and create the filename with the following format:\n[current branch]-[date (YYYY-MM-DD)]-[7 character commit hash][-increment].sql.gz");
+    case 'drush:iso-dl-commit':
+      return dt("Download and commit a project");
     case 'meta:isovera_tools:title':
       return dt("Isovera Tools commands");
     case 'meta:isovera_tools:summary':
@@ -28,6 +30,14 @@ function isovera_tools_drush_command() {
     'description' => dt('Creates a sql-dump with filename that includes date, git branch and commit hash.'),
     'aliases' => array('isodump'),
   );
+  $items['iso-dl-commit'] = array(
+    'description' => dt('Download and commit a Drupal project'),
+    'aliases' => array('dlco'),
+    'arguments' => array(
+      'project' => 'A drupal.org project name (views, webform, etc.)',
+    ),
+  );
+
   return $items;
 }
 
@@ -80,4 +90,22 @@ function drush_isovera_tools_iso_git_commit_dump() {
   drush_invoke_process('@self', 'sql-dump', array(), $options);
   exec("gzip $result_file");
   drush_log("Database dump gzipped to $result_file.gz", 'ok');
+}
+
+/**
+ * Callback function for drush iso-git-commit-dump
+ *
+ */
+function drush_isovera_tools_iso_dl_commit($project) {
+
+  // check if we can bootstrap
+  $self = drush_sitealias_get_record('@self');
+  if (empty($self)) {
+    drush_die("I can't bootstrap from the current location.", 0);
+  }
+  $projects = array($project);
+  $options = array();
+
+  drush_invoke_process('@self', 'dl', $projects, $options);
+  drush_log("Code for git commits not yet added", 'ok');
 }
