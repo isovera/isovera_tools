@@ -29,33 +29,41 @@ This module installs a backup and migrate profile named isovera_tools, which
 provides a file name with the git tokens. You will probably want to update the
 excluded tables and other settings for this profile at
 
-`/admin/config/system/backup_migrate/profile/list/edit/isovera_tools`
+```
+/admin/config/system/backup_migrate/profile/list/edit/isovera_tools
+```
 
 ### Git Tokens
 
 The following tokens are included:
 
-* git-branch - The current git branch name
-* git-hash - The abbreviated git hash of the current commit
+* `git-branch` The current git branch name
+* `git-hash` The abbreviated git hash of the current commit
 
 ### Destination
 
 To set a backup destination using Backup and Migrate, add the following snippet
 to your local settings.php file:
 
-  $conf['backup_migrate_destinations_defaults'][] = array(
-    'type' => 'file',
-    'destination_id' => 'mydestination',
-    'name' => 'Configured Destination',
-    'location' => 'sites/default/files/backup_migrate/manual',
-    'settings' => array(
-    ),
-  );
+```
+$conf['backup_migrate_destinations_defaults'][] = array(
+  'type' => 'file',
+  'destination_id' => 'mydestination',
+  'name' => 'Configured Destination',
+  'location' => 'sites/default/files/backup_migrate/manual',
+  'settings' => array(
+  ),
+);
+```
 
 then in the command line, to use the backup and migrate command, invoke:
 
-  $ drush bb db mydestination isovera_tools
+```
+$ drush bb db mydestination isovera_tools
+```
 
 For more information on the drush backup and migrate command, enter:
 
-  $ drush help bam-backup
+```
+$ drush help bam-backup
+```
