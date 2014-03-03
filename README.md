@@ -1,36 +1,61 @@
-drush-scripts
+Isovera developer tools
 =============
 
-## sql-gd: Git-aware database dump script
+A collection of commonly reused scripts and stuff.
 
-SQL-GD Peforms a Drush sql-dump and creates the filename with the following components: current branch, ISO 8601 date (YYYY-MM-DD) and the seven character SHA-1 commit hash.
+# iso-git-commit-dump
 
-A dump file created with this script will look something like this:
+ that wraps the git-aware db dump script in a module and provides the drush iso-git-commit-dump command (alias: isodump). Two tokens are also provided for use with the Backup and Migrate module.
 
-<pre>backup/develop_2013-08-12_e970d31.sql</pre>
-
-* For brevity, time is not included in the date component. Instead the filename is auto-incremented if it already exists.
-* Currently, a backup/ directory at the same level as the web document root is required to exist.
-* Underscores are used to separate components
-
-I recommend creating a Drush shell alias pointing to this script. In drushrc.php, add:
-
-```$options['shell-aliases']['sql-gd'] = "!drush scr /path/to/sql-gd.php";```
-
-For information on Drush shell aliases, see http://drush.ws/examples/example.drushrc.php
-
-
-## isovera_tools: Isovera developer tools
-
-A custom module that wraps the git-aware db dump script in a module and provides the drush iso-git-commit-dump command (alias: isodump). Two tokens are also provided for use with the Backup and Migrate module.
+## Usage
 
 To use, simply enable the Isovera Tools module and perform the following drush command:
-<pre>$ drush isodump</pre>
+
+```
+$ drush isodump
+```
+
 The backup directory location defaults to `private://backup`. This can be overridden in a local settings.php file with the following snippet:
 
-```$conf['isovera_tools_backup_dir'] = '/path/to/backup';```
+```
+$conf['isovera_tools_backup_dir'] = '/path/to/backup';
+```
+
+## Backup and Migrate support
+
+### Profile
+
+This module installs a backup and migrate profile named isovera_tools, which
+provides a file name with the git tokens. You will probably want to update the
+excluded tables and other settings for this profile at
+
+`/admin/config/system/backup_migrate/profile/list/edit/isovera_tools`
+
+### Git Tokens
 
 The following tokens are included:
 
 * git-branch - The current git branch name
 * git-hash - The abbreviated git hash of the current commit
+
+### Destination
+
+To set a backup destination using Backup and Migrate, add the following snippet
+to your local settings.php file:
+
+  $conf['backup_migrate_destinations_defaults'][] = array(
+    'type' => 'file',
+    'destination_id' => 'mydestination',
+    'name' => 'Configured Destination',
+    'location' => 'sites/default/files/backup_migrate/manual',
+    'settings' => array(
+    ),
+  );
+
+then in the command line, to use the backup and migrate command, invoke:
+
+  $ drush bb db mydestination isovera_tools
+
+For more information on the drush backup and migrate command, enter:
+
+  $ drush help bam-backup
